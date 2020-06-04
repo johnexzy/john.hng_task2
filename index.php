@@ -17,33 +17,40 @@ while ($file = readdir($dir)) {
     switch ($fileExt) {
         case 'php':
 
-            exec("php script/$file", $output, $stat);
-            $datum = json_decode($output[0], true);
-            $data[]= $datum;
-            $output = [];
+            if(exec("php script/$file", $output, $stat)){
+                $datum = json_decode($output[0], true);
+                $data[]= $datum;
+                $output = [];
+            }
+            
             break;
         case 'js' :
-            exec("node script/$file", $output, $stat);
-            $datum = json_decode($output[0], true);
+           if( exec("node script/$file", $output, $stat)){
+                $datum = json_decode($output[0], true);
+                $data[]= $datum;
+                $output = []; 
+           }
+            
             if ($stat == 0) {
                 # code...
-            }
-            $data[]= $datum;
-            $output = [];
-                
+            }    
             break;
         case 'py' :
-            exec("python script/$file", $output, $stat);
-            $datum = json_decode($output[0], true);
-            $data[]= $datum;
-            $output = [];
+            if(exec("python script/$file", $output, $stat)){
+                $datum = json_decode($output[0], true);
+                $data[]= $datum;
+                $output = [];
+            }
+            
 
             break;
         case 'dart' :
-            exec("dart script/$file", $output, $stat);
-            $datum = json_decode($output[0], true);
-            $data[]= $datum;
-            $output = [];
+            if(exec("dart script/$file", $output, $stat)){
+                $datum = json_decode($output[0], true);
+                $data[]= $datum;
+                $output = [];
+            };
+            
 
             break;
         default:
@@ -63,16 +70,7 @@ if (isset($_GET["json"])) {
 }
 else {
     header("Content-Type: text/html");
-    echo "<table>
-            <tr>
-                <td>Output</td>
-                <td>Name</td>
-                <td>HNG-ID</td>
-                <td>email</td>
-                <td>Language</td>
-            </tr>
-            
-            ";
+    include "Layout/header.php";
     foreach ($data as $datums) {
         echo "<tr>";
             foreach (array_keys($datums) as $value) {
@@ -84,5 +82,5 @@ else {
         
 
     }
-    
+    include "Layout/footer.php";
 }
