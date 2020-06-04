@@ -1,25 +1,21 @@
 <?php
 
 
-// $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-// $uri = explode('?', $uri);
-
-// $out = file_get_contents("script/JohnOba.php");
-// echo $out;
 //main directory of all script files
 $dir = opendir("script"); 
 //a json based array of all the data
 $data = []; 
 while ($file = readdir($dir)) {
     //file type of the script e.g js, php, py
-    $fileExt = explode(".", $file)[count(explode(".", $file)) - 1]; 
-// echo $fileExt;
+    $fileExt = pathinfo($file, PATHINFO_EXTENSION);
     switch ($fileExt) {
         case 'php':
 
             if(exec("php script/$file", $output, $stat)){
+                
                 $datum = json_decode($output[0], true);
                 $data[]= $datum;
+
                 $output = [];
             }
             
@@ -42,7 +38,6 @@ while ($file = readdir($dir)) {
                 $output = [];
             }
             
-
             break;
         case 'dart' :
             if(exec("dart script/$file", $output, $stat)){
@@ -57,12 +52,8 @@ while ($file = readdir($dir)) {
             # code...
             break;
     }
-    // exec("php script/$file", $output, $stat);
 }
 
-// $output = [];
-// $stat;
-// exec("node script/JohnOba.js", $output, $stat);
 if (isset($_GET["json"])) {
         header("Content-Type: application/json");
         echo json_encode($data);
