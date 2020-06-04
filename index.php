@@ -62,10 +62,10 @@ if (isset($_GET["json"])) {
 else {
     header("Content-Type: text/html");
     include "Layout/header.php";
-    foreach ($data as $datums) {
+    foreach ($data as $user) {
         echo "<tr>";
-            foreach (array_keys($datums) as $value) {
-                echo "<td>$datums[$value]</td>";
+            foreach (array_keys($user) as $value) {
+                echo "<td>$user[$value]</td>";
             }
             
         echo "</tr>";
