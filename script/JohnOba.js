@@ -1,8 +1,8 @@
 let mydata = {
-    output: "Hello world, this is Oba John with HNGi7 ID HNG-04363 using Javascript for stage 2 task",
-    name: "Oba John",
-    id: "HNG-04363",
-    email: "obajohn75@gmail.com",
+    output: "Hello world, this is Onida Ofodi with HNGi7 ID HNG-02363 using Javascript for stage 2 task",
+    name: "Onida ofodi",
+    id: "HNG-02363",
+    email: "onida122@gmail.com",
     language: "JavaScript"
   }
 console.log(JSON.stringify(mydata))
