@@ -2,7 +2,7 @@
 import 'dart:convert';
 
 void main(List<String> args) {
-  _getDay(){
+  _returnDetails(){
   return jsonEncode({
     "output": "Hello world, this is Oba John with HNGi7 ID HNG-04363  using Dart for stage 2 task",
     "name": "Oba John",
@@ -11,5 +11,5 @@ void main(List<String> args) {
     "language": "Dart"
     });
 }
-  print(_getDay());
+  print(_returnDetails());
 }
